@@ -1,0 +1,65 @@
+Documenting the steps taken to establish connection between computer and hostss
+
+Let host be
+
+Name: Xenon 2
+User: ahmad
+Host: xenon2
+
+This is the client, client never had connection with xenon2s:
+
+Name: Luminous
+User: ahmad
+Host: ?
+
+what happens if i do ssh ahmad@xenon2s:
+
+Without creating any key, I was able to log in by brute-forcing the password. Not good.
+
+Ok, now I disabled Password Auth in /etc/ssh/*config, result:
+
+ahmad@xenon2: Permission denied (publickey).
+
+PERFECT!
+
+Now let's create a key pair and attempt to establish connection with that.
+
+> key id: a31365de; generated on 2025-07-13 by Luminous as part of a test"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/ahmad/.ssh/id_ed25519): a31365de.key
+Enter passphrase for "a31365de.key" (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in a31365de.key
+Your public key has been saved in a31365de.key.pub
+The key fingerprint is:
+SHA256:9AYIvW5abCedl6rBcAJ01H2wo6cr8feuLhcAkkUgE0s 
+key id: a31365de; generated on 2025-07-13 by Luminous as part of a test
+The key's randomart image is:
++--[ED25519 256]--+
+|+Eo**o ...       |
+|.=o...o....      |
+|. .. ...=.       |
+|   .  oo +       |
+|    ooooS.o.     |
+|    .=Bo=.o      |
+|     B+o +       |
+|    o oo+        |
+|     .o*o+o      |
++----[SHA256]-----+
+
+New keys created named a31365de.key
+
+I believe we must now hand the key to the server via ssh-copy-id.
+
+If server accepted passwords, one would do ssh-copy-id, but it's not possible.,
+so must find another method: USB or email.
+
+
+Must also add private 
+
+STEPS summary:
+
+1. ssh-keygen key pair
+2. ssh-add private to ssh-agent
+3. copy public key to server's ~/.ssh/authorized_keys
+
