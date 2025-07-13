@@ -36,6 +36,45 @@ then enter `yes` if prompted, should now be connected.
 
 To connect in WAN, must specify port number ```ssh $user@$localIp -p $port```
 
-## SORTME
+---
+
+## BRAINSTORM
 
 configuration is stored in /etc/ssh
+
+How to do Passwordless SSH using ssh-copy-id Command:
+
+(hold-up... the server doesn't actually need the private key? Recreate with entire flow)
+
+```
+client$ ssh-keygen
+> 1 x 🔑 (private)
+> 1 x 🗝️ (public)
+```
+
+SUCCESS
+
+1. Port forwarding on Bel Modem
+
+use curl command to discover Public IP as opposed to local IP
+and use ip one-liner to discover Local IP
+
+on router settings, set
+
+Name = any string
+Protocol = TCP
+Internal port = port number
+External port = Internal port value
+Local IP = Local Ip
+
+Save and activate
+
+do ssh user@publicIp -p port
+
+done.
+
+add port forwarding to diagram
+
+it stopped working???????
+
+ping publicIp results in 100% packet loss, what could this mean???????
