@@ -1,5 +1,8 @@
 Documenting the steps taken to establish connection between computer and hostss
 
+EXECUTE SCRIPT server-assistant-setup
+INCLUDE UPDATE DRAWIO GIF
+
 Let host be
 
 Name: Xenon 2
@@ -63,3 +66,32 @@ STEPS summary:
 2. ssh-add private to ssh-agent
 3. copy public key to server's ~/.ssh/authorized_keys
 
+### SECURITY
+
+# set maximum authentication retries to prevent brute force attacks
+MaxAuthTries 3
+
+# enable pubkey authentication
+PubkeyAuthentication yes
+
+# no root access
+PermitRootLogin no
+
+# vulnerable to brute-force attacks, better to use key pairs
+PasswordAuthentication no
+
+# high amount of attacks on port 22, moved port for extra security
+# must allow on firewall
+	# /etc/ssh $sudo firewall-cmd --zone=public --add-port=57576/tcp --permanent
+	# success
+
+	# /etc/ssh $sudo firewall-cmd --reload
+	# success
+
+	# /etc/ssh $sudo firewall-cmd --zone=public --list-ports
+	# 57576/tcp
+Port 57576
+
+#TODO: use fail2ban
+
+### /SECURITY
